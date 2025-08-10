@@ -15,8 +15,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasCookie('is_admin') && $request->cookie('is_admin') == true)
-            return $next($request);
-        abort(401);
+        // check for the is_admin cookie and only forward if it is true. else abort
+        if ($request->cookie('is_admin') != 'true') {
+            abort(403, 'Unauthorized');
+        }
+        return $next($request);
     }
 }

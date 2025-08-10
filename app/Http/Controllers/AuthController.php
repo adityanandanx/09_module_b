@@ -10,12 +10,18 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $pass = $request->input('passphrase');
+        $pass = $request['passphrase'];
+
 
         if ($pass == 'admin') {
-            return to_route('login')->withCookie(cookie('is_admin', true));
+            return redirect()
+                ->route('companies.index')
+                ->withCookie(cookie('is_admin', 'true', 60 * 60));
         }
 
-        return to_route('login')->withErrors(['passphrase' => 'invalid credentials']);
+        return redirect()
+            ->back()
+            ->withCookie(cookie('is_admin', 'false', 0))
+            ->withErrors(['passphrase' => 'Invalid Passphrase']);
     }
 }
