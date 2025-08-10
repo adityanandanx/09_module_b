@@ -40,7 +40,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return Inertia::render('companies/show', ['company' => $company]);
+        return Inertia::render('companies/show', ['company' => $company, 'products' => $company->products]);
     }
 
     /**
