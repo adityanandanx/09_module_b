@@ -37,3 +37,20 @@ export type Company = {
     updated_at: string;
     deactivated: boolean;
 };
+
+export type Product = {
+    gtin: string;
+    name: string;
+    name_fr: string;
+    description: string;
+    description_fr: string;
+
+    brand: string;
+    country_of_origin: string;
+    gross_weight: number;
+    net_content_weight: number;
+
+    weight_unit: string;
+
+    company_id: string;
+};

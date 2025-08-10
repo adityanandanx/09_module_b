@@ -27,4 +27,9 @@ class Company extends Model
             'deactivated' => 'boolean',
         ];
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'company_id');
+    }
 }
