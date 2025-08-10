@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->decimal('gross_weight', 8, 2)->nullable(); // includes packaging
             $table->decimal('net_content_weight', 8, 2)->nullable();
             $table->string('weight_unit', 20)->default('kg'); // eg: kg, g, lb, oz
+            $table->boolean('hidden')->default('false');
 
             // Foriegn keys
             $table->foreignId('company_id')->constrained('companies');

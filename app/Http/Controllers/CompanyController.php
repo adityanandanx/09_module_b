@@ -72,6 +72,8 @@ class CompanyController extends Controller
     public function deactivate(Company $company)
     {
         $company->update(['deactivated' => true]);
+        $company->products()->update(['hidden' => true]);
+
         return to_route('companies.show', $company);
     }
     public function activate(Company $company)
