@@ -53,4 +53,5 @@ export type Product = {
     weight_unit: string;
 
     company_id: string;
+    hidden: boolean;
 };

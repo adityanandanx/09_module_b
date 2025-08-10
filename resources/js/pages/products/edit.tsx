@@ -13,9 +13,9 @@ type Props = {
 };
 
 const EditProduct = ({ product, companies }: Props) => {
-    const { data, setData, put, errors, processing } = useForm<Product>(product);
+    const { data, setData, put, errors, processing } = useForm<Omit<Product, 'hidden'>>(product);
 
-    const h = (key: keyof Product) => ({
+    const h = (key: keyof Omit<Product, 'hidden'>) => ({
         value: data[key],
         onChange: (e: ChangeEvent<HTMLInputElement>) => setData(key, e.target.value),
     });

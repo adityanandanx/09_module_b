@@ -5,10 +5,24 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::prefix('09_module_b')->group(function () {
+
+    Route::post('/verify', function (Request $request) {
+        $gtins = $request->input('gtins', []);
+        $results = collect($gtins)->map(function ($gtin) {
+            $product = Product::where('gtin', $gtin)->where('hidden', false)->first();
+            return [
+                'gtin' => $gtin,
+                'valid' => !!$product,
+            ];
+        })->toArray();
+        return ['results' => $results];
+    });
+
     Route::get('/', function () {
         return Inertia::render('welcome');
     })->name('home');
@@ -131,6 +145,11 @@ Route::prefix('09_module_b')->group(function () {
                     ],
                 ],
             ];
+        });
+
+
+        Route::get('/verify', function () {
+            return Inertia::render('verify');
         });
     });
 });
